@@ -65,6 +65,7 @@ export async function POST(req : NextRequest){
 
 export async function GET(req: NextRequest){
     const creatorId = req.nextUrl.searchParams.get("creatorId");
+    console.log('authOptions '+authOptions)
     const session = await getServerSession(authOptions);
     if (!session) {
         return NextResponse.json(
@@ -93,7 +94,8 @@ export async function GET(req: NextRequest){
     }
     const [streams, activeStream] = await Promise.all([await prismaClient.stream.findMany({
         where:{
-            userId: creatorId
+            userId: creatorId,
+            played : false
         },
         include:{
             _count:{

@@ -20,7 +20,8 @@ export async function GET(req : NextRequest){
     }
     const mostUpvotedStream = await prismaClient.stream.findFirst({
         where:{
-            userId : user.id
+            userId : user.id, 
+            played : false
         },
         orderBy:{
             upvotes:{

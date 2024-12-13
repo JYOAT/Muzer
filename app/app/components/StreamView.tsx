@@ -31,6 +31,7 @@ type Props = {
   playNextLoader: boolean;
   playNext: () => void;
 };
+
 const REFRESH_INTERVAL_MS = 10 * 1000;
 
 export default function StreamView({
@@ -52,6 +53,7 @@ export default function StreamView({
       credentials: "include",
     });
     const json = await res.json();
+    console.log("json = ", json);
     setQueue(
       json.streams.sort((a: any, b: any) => (a.upvotes < b.upvotes ? 1 : -1))
     );
@@ -62,10 +64,11 @@ export default function StreamView({
       return json.activeStream.currentStream;
     });
   }
+
   useEffect(() => {
     refreshStreams();
     const interval = setInterval(() => {
-      refreshStreams();
+      //refreshStreams();
     }, REFRESH_INTERVAL_MS);
     return () => clearInterval(interval);
   }, []);
@@ -88,7 +91,7 @@ export default function StreamView({
     return () => {
       player.destroy();
     };
-  });
+  }, [currentVideo, videoPlayerRef]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

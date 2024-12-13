@@ -12,7 +12,7 @@ import { Appbar } from "../components/Appbar";
 import { urlRegex } from "../lib/utils";
 import StreamView from "../components/StreamView";
 
-const creatorId = "99ae035a-c98c-41d3-b80c-e181ab4c94f4";
+const creatorId = "84653aa8-72dc-431c-995b-b90697ad986c";
 export default function Component() {
   return <StreamView creatorId={creatorId} playVideo={true}></StreamView>;
 }
